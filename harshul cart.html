@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .products {
+            margin-top: 20px;
+        }
+
+        .product {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .add-to-cart {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .cart {
+            position: fixed;
+            top: 0;
+            right: -1000px;
+            width: 400px;
+            height: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .cart.open {
+            right: 0;
+        }
+
+        .cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .cart-item button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-item button:hover {
+            background-color: #c82333;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .open-cart {
+            display: block;
+            margin: 20px auto;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .close-cart {
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .close-cart:hover {
+            background-color: #c82333;
+        }
+
+        .proceed-to-checkout {
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .proceed-to-checkout:hover {
+            background-color: #218838;
+        }
+
+        .cart-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .menu-item-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <div class="products">
+            <div class="product" data-title="Shahi Paneer">
+                <h3>Shahi Paneer</h3>
+                <p>$10</p>
+                <button class="add-to-cart" data-price="10">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Kadhai Paneer">
+                <h3>Kadhai Paneer</h3>
+                <p>$15</p>
+                <button class="add-to-cart" data-price="15">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Dal Makhni">
+                <h3>Dal Makhni</h3>
+                <p>$20</p>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Paneer Bhurji">
+                <h3>Paneer Bhurji</h3>
+                <p>$25</p>
+                <button class="add-to-cart" data-price="25">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Butter Naan">
+                <h3>Butter Naan</h3>
+                <p>$5</p>
+                <button class="add-to-cart" data-price="5">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Butter Chapatti">
+                <h3>Butter Chapatti</h3>
+                <p>$3</p>
+                <button class="add-to-cart" data-price="3">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Burger">
+                <h3>Burger</h3>
+                <p>$8</p>
+                <button class="add-to-cart" data-price="8">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Pizza">
+                <h3>Pizza</h3>
+                <p>$12</p>
+                <button class="add-to-cart" data-price="12">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Manchurian">
+                <h3>Manchurian</h3>
+                <p>$18</p>
+                <button class="add-to-cart" data-price="18">Add to Cart</button>
+            </div>
+            <div class="product" data-title="Cheese Chilly">
+                <h3>Cheese Chilly</h3>
+                <p>$22</p>
+                <button class="add-to-cart" data-price="22">Add to Cart</button>
+            </div>
+        </div>
+        <button class="open-cart">Cart</button>
+    </div>
+
+    <div class="cart">
+        <h2>Cart</h2>
+        <ul class="cart-items"></ul>
+        <p>Total: $<span class="total">0</span></p>
+        <div class="cart-buttons">
+            <button class="close-cart">Close</button>
+            <button class="proceed-to-checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const openCartButton = document.querySelector('.open-cart');
+            const closeCartButton = document.querySelector('.close-cart');
+            const cartElement = document.querySelector('.cart');
+            const cartItemsElement = document.querySelector('.cart-items');
+            const totalElement = document.querySelector('.total');
+            const searchInput = document.getElementById('searchInput');
+
+            let cartItems = [];
+            let total = 0;
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const title = button.parentElement.dataset.title;
+                    const price = parseFloat(button.getAttribute('data-price'));
+
+                    const existingItemIndex = cartItems.findIndex(item => item.title === title);
+                    if (existingItemIndex !== -1) {
+                        cartItems[existingItemIndex].quantity++;
+                    } else {
+                        cartItems.push({ title, price, quantity: 1 });
+                    }
+                    total += price;
+
+                    renderCart();
+                });
+            });
+
+            openCartButton.addEventListener('click', function () {
+                cartElement.classList.toggle('open');
+            });
+
+            closeCartButton.addEventListener('click', function () {
+                cartElement.classList.remove('open');
+            });
+
+            searchInput.addEventListener('input', function () {
+                const searchQuery = searchInput.value.toLowerCase();
+                const products = document.querySelectorAll('.product');
+
+                products.forEach(product => {
+                    const productName = product.dataset.title.toLowerCase();
+                    if (productName.includes(searchQuery)) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+
+            function renderCart() {
+                cartItemsElement.innerHTML = '';
+                cartItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.classList.add('cart-item');
+                    li.innerHTML = `
+                        <span>${item.title}: $${item.price}</span>
+                        <div>
+                            <input type="number" min="1" value="${item.quantity}" class="item-quantity">
+                            <button class="remove-item">Remove</button>
+                        </div>
+                    `;
+                    cartItemsElement.appendChild(li);
+
+                    const quantityInput = li.querySelector('.item-quantity');
+                    quantityInput.addEventListener('change', function () {
+                        const newQuantity = parseInt(quantityInput.value);
+                        if (newQuantity <= 0) {
+                            cartItems = cartItems.filter(cartItem => cartItem.title !== item.title);
+                            total -= item.price * item.quantity;
+                        } else {
+                            total += item.price * (newQuantity - item.quantity);
+                            item.quantity = newQuantity;
+                        }
+                        totalElement.textContent = total.toFixed(2);
+                    });
+                });
+
+                totalElement.textContent = total.toFixed(2);
+
+                const removeButtons = document.querySelectorAll('.remove-item');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const title = button.parentElement.parentElement.querySelector('span').textContent.split(':')[0];
+                        const removedItem = cartItems.find(item => item.title === title);
+                        total -= removedItem.price * removedItem.quantity;
+                        cartItems = cartItems.filter(item => item.title !== title);
+                        renderCart();
+                    });
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

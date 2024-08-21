@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cosmetics website </title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#home" class="logo"> <img src="images/logo.png" alt=""> </a>
+
+    <form action="" class="search-form">
+        <input type="search" name="" placeholder="search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+    <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div id="search-btn" class="fas fa-search"></div>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart" onclick="window.location.href='cart1.html' "></a>
+    </div>
+
+
+</header>
+
+<!-- navbar section  -->
+
+<nav class="navbar">
+    <div id="close-navbar" class="fas fa-times"></div>
+    <a href="#home">home</a>
+    <a href="#shop">shop</a>
+    <a href="#gallery">gallery</a>
+    <a href="#team">team</a>
+    <a href="#blogs">blogs</a>
+</nav>
+
+<!-- navbar section  -->
+
+<!-- header section ends -->
+
+
+</head>
+
+<h1>Shopping Cart</h1>
+    <div class="container">
+        <button class="centered-button"><a href="lab-evalution.html" >back to home page </a></button>
+    </div>
+    
+
+<body>
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const openCartButton = document.querySelector('.open-cart');
+        const closeCartButton = document.querySelector('.close-cart');
+        const cartElement = document.querySelector('.cart');
+        const cartItemsElement = document.querySelector('.cart-items');
+        const totalElement = document.querySelector('.total');
+        const searchInput = document.getElementById('searchInput');
+
+        let cartItems = [];
+        let total = 0;
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const title = button.parentElement.dataset.title;
+                const price = parseFloat(button.getAttribute('data-price'));
+
+                const existingItemIndex = cartItems.findIndex(item => item.title === title);
+                if (existingItemIndex !== -1) {
+                    cartItems[existingItemIndex].quantity++;
+                } else {
+                    cartItems.push({ title, price, quantity: 1 });
+                }
+                total += price;
+
+                renderCart();
+            });
+        });
+
+        openCartButton.addEventListener('click', function () {
+            cartElement.classList.toggle('open');
+        });
+
+        closeCartButton.addEventListener('click', function () {
+            cartElement.classList.remove('open');
+        });
+
+        searchInput.addEventListener('input', function () {
+            const searchQuery = searchInput.value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const productName = product.dataset.title.toLowerCase();
+                if (productName.includes(searchQuery)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+
+        function renderCart() {
+            cartItemsElement.innerHTML = '';
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+                li.innerHTML = `
+                    <span>${item.title}: $${item.price}</span>
+                    <div>
+                        <input type="number" min="1" value="${item.quantity}" class="item-quantity">
+                        <button class="remove-item">Remove</button>
+                    </div>
+                `;
+                cartItemsElement.appendChild(li);
+
+                const quantityInput = li.querySelector('.item-quantity');
+                quantityInput.addEventListener('change', function () {
+                    const newQuantity = parseInt(quantityInput.value);
+                    if (newQuantity <= 0) {
+                        cartItems = cartItems.filter(cartItem => cartItem.title !== item.title);
+                        total -= item.price * item.quantity;
+                    } else {
+                        total += item.price * (newQuantity - item.quantity);
+                        item.quantity = newQuantity;
+                    }
+                    totalElement.textContent = total.toFixed(2);
+                });
+            });
+
+            totalElement.textContent = total.toFixed(2);
+
+            const removeButtons = document.querySelectorAll('.remove-item');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const title = button.parentElement.parentElement.querySelector('span').textContent.split(':')[0];
+                    const removedItem = cartItems.find(item => item.title === title);
+                    total -= removedItem.price * removedItem.quantity;
+                    cartItems = cartItems.filter(item => item.title !== title);
+                    renderCart();
+                });
+            });
+        }
+    });
+
+</script>
+
+<!-- footer section starts  -->
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link      -->
+<script src="script.js"></script>
+
+<script>
+    lightGallery(document.querySelector('.gallery .lightbox'));
+</script>
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cosmetics website</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- LightGallery CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Custom JavaScript file link -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <a href="#home" class="logo"> <img src="images/logo.png" alt=""> </a>
+    <form action="" class="search-form">
+        <input type="search" name="" placeholder="Search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+    <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div id="search-btn" class="fas fa-search"></div>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+    </div>
+</header>
+<!-- Header section ends -->
+
+<!-- Navbar section -->
+<nav class="navbar">
+    <div id="close-navbar" class="fas fa-times"></div>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#team">Team</a>
+    <a href="#arrivals">Arrivals</a>
+    <a href="#blogs">Blogs</a>
+</nav>
+<!-- Navbar section ends -->
+
+<!-- Category section starts -->
+<section class="category">
+    <div class="mk-pic">
+        <a href="images/product-2.jpeg"><img src="images/product-2.jpg" width="80%" style="width: 60%; margin: 10px;"></a>
+    </div>
+
+    <div class="makeup-kit">
+        <h1>Beauty Products</h1>
+        <h3>Rs 1500</h3>
+        <h4><b>Product details</b></h4>
+        <span>A world of radiant allure with our carefully curated collection of cosmetics. From the subtle glow of our illuminating foundations to the bold statements made by our vibrant lip shades, we offer products that cater to every style and occasion.</span>
+        <input type="number" id="quantity" value="1">
+        <button onclick="addToCart()">Add to cart</button>
+        <button onclick="buyNow()">Buy Now</button>
+    </div>
+</section>
+<!-- Category section ends -->
+
+<!-- Footer section starts -->
+<section class="footer">
+    <div class="box-container">
+        <!-- Footer content -->
+    </div>
+    <div class="credit">Created by <span>Harshita</span> | All rights reserved!</div>
+</section>
+<!-- Footer section ends -->
+
+<!-- LightGallery JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<script>
+    // Function to handle adding to cart
+    function addToCart() {
+        var quantity = document.getElementById("quantity").value;
+        // You can add your cart functionality here, e.g., adding the product to the cart with the specified quantity
+        alert("Added " + quantity + " items to the cart.");
+    }
+
+    // Function to handle buying now
+    function buyNow() {
+        var quantity = document.getElementById("quantity").value;
+        // You can add your buy now functionality here, e.g., redirecting to the checkout page with the specified quantity
+        alert("Buying " + quantity + " items now.");
+    }
+</script>
+
+</body>
+</html>
